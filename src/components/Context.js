@@ -1,4 +1,4 @@
-import React, {useState, createContext } from "react";
+import React, { useState, createContext } from "react";
 import axios from 'axios'
 import searchImages from "./UnsplashApi";
 
@@ -12,16 +12,35 @@ const Provider = ({ children }) => {
 
 
     }
-  
-    const builProduct=(item)=>{
-        const image = searchImages(item.Brand)
-        
 
+    const builProduct = async (item) => {
+        const image = await searchImages(item.Brand);
+        item.image = image[0].urls.small;
+      
+        const payload = {
+          Brand: item.Brand,
+          engine: item.engine,
+          category: item.category,
+          min_price: item.minprice,
+          max_price: item.maxprice,
+          kilometer_scale: item.kilometerscale,
+          uniuqe_id: item.uniuqe_id,
+          image: item.image,
+        };
+      
+        try {
+          await axios.put('http://localhost:3000/Update', payload);
+          fetchProduct();
+        } catch (error) {
+          console.error(error);
+          // Handle the error
+        }
+      };
+      
 
-    }
-  
-    const sharedobject={
+    const sharedobject = {
         fetchProduct,
+        builProduct,
         list
     }
     return (<ShoppingContext.Provider value={sharedobject}>
