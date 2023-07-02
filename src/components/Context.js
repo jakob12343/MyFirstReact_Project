@@ -22,6 +22,7 @@ const Provider = ({ children }) => {
   
     const sharedobject={
         fetchProduct,
+        builProduct,
         list
     }
     return (<ShoppingContext.Provider value={sharedobject}>
