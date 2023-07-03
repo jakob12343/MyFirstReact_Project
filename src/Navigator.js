@@ -10,10 +10,8 @@ import ShoppingContext from './components/Context';
 function NavScrollExample() {
   const { fetchProduct } = useContext(ShoppingContext);
 
-  const handleSearch = () => {
-    // Implement your search logic here
-    // Example: Call fetchProduct with search query
-    fetchProduct();
+  const handleSearch = (event ) => {
+   console.log(event.target.value);
   };
 
   return (
