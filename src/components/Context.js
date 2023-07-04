@@ -21,6 +21,7 @@ const Provider = ({ children }) => {
     {children}
   </ShoppingContext.Provider>)
 
+
 }
 export { Provider }
 export default ShoppingContext
