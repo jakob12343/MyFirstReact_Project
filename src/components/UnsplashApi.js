@@ -14,7 +14,6 @@ const searchImages = async(searchTag, page = 1, per_page = 10) =>{
       page
     }
     })
-console.log(results);
   return  results.data.results;
 }
 
