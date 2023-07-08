@@ -1,10 +1,11 @@
 import React, { useState, createContext } from "react";
 import axios from 'axios'
-import searchImages from "./UnsplashApi";
 
 const ShoppingContext = createContext()
 const Provider = ({ children }) => {
   const [list, setlist] = useState([])
+
+  
 
   const fetchProduct = async () => {
     const products = await axios.get('http://localhost:3000/Read')
@@ -15,7 +16,7 @@ const Provider = ({ children }) => {
 
   const sharedobject = {
     fetchProduct,
-    list
+    list, setlist
   }
   return (<ShoppingContext.Provider value={sharedobject}>
     {children}

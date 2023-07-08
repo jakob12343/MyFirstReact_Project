@@ -5,7 +5,7 @@ import searchImages from './UnsplashApi';
 
 function Product({ item }) {
   const [imageURL, setImageURL] = useState('');
-  const { uniuqe_id, Brand, engine, category, min_price, max_price, kilometer_scale } = item;
+  const {  Brand, engine, category, min_price, max_price, kilometer_scale } = item;
 
   useEffect(() => {
     const fetchImage = async () => {

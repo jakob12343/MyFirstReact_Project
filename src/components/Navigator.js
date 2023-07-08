@@ -1,19 +1,12 @@
-import { useContext } from 'react';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import ShoppingContext from './components/Context';
+import Search from './Search';
 
 function NavScrollExample() {
-  const { fetchProduct } = useContext(ShoppingContext);
 
-  const handleSearch = (event ) => {
-   console.log(event.target.value);
-  };
-
+  
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
@@ -41,17 +34,7 @@ function NavScrollExample() {
               Link
             </Nav.Link>
           </Nav>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success" onClick={handleSearch}>
-              Search
-            </Button>
-          </Form>
+          <Search/>
         </Navbar.Collapse>
       </Container>
     </Navbar>

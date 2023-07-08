@@ -1,7 +1,7 @@
 import './App.css';
 import { Provider } from './components/Context';
 import ListProducts from './components/ListProducts';
-import NavScrollExample from './Navigator';
+import NavScrollExample from './components/Navigator';
 
 function App() {
   return (
@@ -9,6 +9,7 @@ function App() {
       <Provider>
       
       <NavScrollExample/>
+      
       <ListProducts/>
       </Provider>
     </div>
