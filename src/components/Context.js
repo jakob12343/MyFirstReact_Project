@@ -9,14 +9,38 @@ const Provider = ({ children }) => {
     const fetchProduct = async () => {
         const products = await axios.get('http://localhost:3000/Read')
         setlist(products.data)
+    }
 
+    const addToServer = async (item, url)=>{
+        await axios.put(`http://localhost:3000/${url}`, item);
+        fetchProduct();
+    }
+
+    const addListProduct = async (items) =>{
 
     }
   
-    const builProduct=(item)=>{
-        const image = searchImages(item.Brand)
+    const builProduct=async(item)=>{
+        const image = await searchImages(item.Brand)
+        item.image = image[0].urls.small;
         
-
+        const payload = {
+          Brand: item.Brand,
+          engine: item.engine,
+          category: item.category,
+          min_price: item.minprice,
+          max_price: item.maxprice,
+          kilometer_scale: item.kilometerscale,
+          uniuqe_id: item.uniuqe_id,
+          image: item.image,
+        };
+      
+        try {
+            addToServer(payload, 'Update')
+        } catch (error) {
+          console.error(error);
+          // Handle the error
+        }
 
     }
   
