@@ -13,12 +13,8 @@ const Provider = ({ children }) => {
   }
 
 
-    const addToServer = async (item, url)=>{
-        await axios.put(`http://localhost:3000/${url}`, item);
-        fetchProduct();
-    }
-
-    const addListProduct = async (items) =>{
+   
+  
 
   const sharedobject = {
     fetchProduct,
