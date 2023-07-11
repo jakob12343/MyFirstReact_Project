@@ -4,7 +4,8 @@ import axios from 'axios'
 const ShoppingContext = createContext()
 const Provider = ({ children }) => {
   const [list, setlist] = useState([])
-
+  const [Item, setItem]=useState({})
+const [image , setimage]=useState()
   
 
   const fetchProduct = async () => {
@@ -13,12 +14,20 @@ const Provider = ({ children }) => {
   }
 
 
-   
+   const ItemToUpdate=(item, image)=>{
+
+    setItem(item)
+    setimage(image)
+   }
   
 
   const sharedobject = {
     fetchProduct,
-    list, setlist
+     setlist,
+     ItemToUpdate,
+     list,
+     Item,
+     image
   }
   return (<ShoppingContext.Provider value={sharedobject}>
     {children}
