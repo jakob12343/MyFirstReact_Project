@@ -1,20 +1,21 @@
-import React, { useContext, useState } from 'react';
-import ShoppingContext from './Context';
+import axios from 'axios';
+import React, {  useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import ShoppingContext from './Context';
 
-const UpdateItem = () => {
-  const { Item, image } = useContext(ShoppingContext);
-  const [brand, setBrand] = useState(Item.Brand);
-  const [engine, setEngine] = useState(Item.engine);
-  const [category, setCategory] = useState(Item.category);
-  const [minPrice, setMinPrice] = useState(Item.min_price);
-  const [maxPrice, setMaxPrice] = useState(Item.max_price);
-  const [kmInScale, setKmInScale] = useState(Item.kilometer_scale);
+const AddItem = () => {
+    const { fetchProduct } = useContext(ShoppingContext)
+
+  const [brand, setBrand] = useState('');
+  const [engine, setEngine] = useState('');
+  const [category, setCategory] = useState('');
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+  const [kmInScale, setKmInScale] = useState('');
 
   const handleBrandChange = (event) => {
     setBrand(event.target.value);
@@ -40,26 +41,31 @@ const UpdateItem = () => {
   const handleKmInScaleChange = (event) => {
     setKmInScale(event.target.value);
   };
-
-  const Uodate=async()=>{
-    Item.Brand=brand
-    Item.engine=engine
-    Item.category=category
-    Item.min_price=minPrice
-    Item.max_price=maxPrice
-    Item.kilometer_scale=kmInScale
-    await axios.put('http://localhost:3000/Update' , Item)
-  }
   const handleSubmit = (event) => {
     event.preventDefault();
 
    
   };
-
+  const Create=async()=>{
+   const Item =[
+    {
+        "Brand": brand,
+        "engine": engine,
+        "category": category,
+        "min_price": minPrice,
+        "max_price": maxPrice,
+        "kilometer_scale": kmInScale
+    
+       }
+   ]
+   
+    await axios.post('http://localhost:3000/Create' , Item)
+    fetchProduct()
+  }
+ 
   return (
     <div>
       <Card style={{ width: '25rem' }}>
-        <Card.Img variant="top" src={image} />
         <Card.Body>
           <Form onSubmit={handleSubmit}>
             <InputGroup className="mb-3">
@@ -129,7 +135,7 @@ const UpdateItem = () => {
               />
             </InputGroup>
             <Link to={'/'}>
-            <Button type="submit" onClick={Uodate} variant="primary">
+            <Button type="submit" onClick={Create} variant="primary">
               Submit
             </Button>
             </Link>
@@ -140,4 +146,4 @@ const UpdateItem = () => {
   );
 };
 
-export default UpdateItem;
+export default AddItem;

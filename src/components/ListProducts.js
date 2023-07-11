@@ -11,7 +11,9 @@ const ListProducts = () => {
       }, []);
   return (
     <div className='display-flex'>
-        {list.map(el=> <Product item={el} key={el.uniuqe_id} />)}
+      
+               {list.map(el=> <Product item={el} key={el.uniuqe_id} />)}
+
     </div>
   )
 }
