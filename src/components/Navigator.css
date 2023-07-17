@@ -1,0 +1,118 @@
+/* Navigator.css */
+.navbar {
+  height: 80px;
+  position: relative;
+  z-index: 100;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+.navbar-toggler {
+  padding: 0.25rem 0.5rem;
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+.navbar-toggler-icon {
+  background-color: #fefcfc; /* Set the color of the toggler icon */
+  box-shadow: none; /* Remove the default box shadow */
+  width: 1.5em; /* Set the width of the toggler icon */
+  height: 1.5em; /* Set the height of the toggler icon */
+  transition: background-color 0.3s ease; /* Add transition for smoother color change */
+}
+
+.navbar-toggler:hover .navbar-toggler-icon {
+  background-color: #007bff; /* Change the color of the toggler icon when hovered */
+}
+
+.navbar-scroll .navbar-nav-scroll {
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.bg-body-tertiary {
+  background-color: #f8f9fa !important;
+}
+
+.navbar {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.navbar .navbar-brand {
+  color: #333;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.navbar .nav-link {
+  color: #333;
+}
+
+.navbar .nav-link:hover {
+  color: #007bff;
+}
+
+.navbar .nav-link.disabled {
+  color: #6c757d;
+}
+
+.navbar .nav-dropdown {
+  color: #333;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+/* Responsive Styles */
+@media (max-width: 991.98px) {
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 0.9rem;
+  }
+
+  .navbar-collapse {
+    flex-basis: 100%;
+    justify-content: flex-start;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    display: none;
+  }
+
+  .navbar-collapse.show {
+    display: block;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 8px;
+  }
+
+  .navbar-nav .nav-link {
+    width: 100%;
+    text-align: left;
+    border-top: 1px solid #dee2e6;
+  }
+
+  .navbar-nav .nav-link:last-child {
+    border-bottom: 1px solid #dee2e6;
+  }
+}

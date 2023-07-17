@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import ShoppingContext from './Context';
 import Dropdown from 'react-bootstrap/Dropdown';
-
+import './Search.css'
 const Search = () => {
     const { setlist } = useContext(ShoppingContext)
     const [searchLine, setSearchLine] = useState('')
@@ -27,7 +27,6 @@ const Search = () => {
        
     }
     const HandleOptions=(event)=>{
-        console.log(event.target.innerText);
         setoptions(event.target.innerText)
     }
 
@@ -42,7 +41,7 @@ const Search = () => {
                     aria-label="Search"
                 />
                 
-                <Button variant="outline-success" onClick={fetchSeearch} >
+                <Button variant="outline-success" type="submit" onClick={fetchSeearch} >
                     Search
                 </Button>
                 

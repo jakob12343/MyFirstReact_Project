@@ -1,0 +1,16 @@
+.add-item-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+  }
+  
+  .home-link {
+    margin-left: 0.5rem;
+  }
+  
+  .error-toast {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  

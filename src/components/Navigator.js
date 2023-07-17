@@ -1,41 +1,41 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Badge from 'react-bootstrap/Badge';
 import Search from './Search';
+import './Navigator.css';
+import { useContext } from 'react';
+import ShoppingContext from './Context';
 
 function NavScrollExample() {
+  const {UserMode,Cart}=useContext(ShoppingContext)
 
-  
+  const Mode = () => {
+    if (UserMode === "seller") {
+      return <Nav.Link href="/AddItem" className="text-dark">Add Item</Nav.Link>
+    } else if (UserMode === "client") {
+      return (
+        <>
+          <Nav.Link href="/Favorites" className="text-dark">Favorites</Nav.Link>
+          <Nav.Link href="/Cart" className="text-dark">Your Cart <Badge variant="dark">{Cart.length}</Badge></Nav.Link>
+        </>
+      );
+    }
+  }
+
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
-      <Container fluid>
-        <Navbar.Brand href="/">Car List</Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
-            navbarScroll
-          >
-            <Nav.Link href="/AddItem">AddItem</Nav.Link>
-            <Nav.Link href="#action2">Link</Nav.Link>
-            <NavDropdown title="Link" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
-                Something else here
-              </NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link href="#" disabled>
-              Link
-            </Nav.Link>
-          </Nav>
-          <Search/>
-        </Navbar.Collapse>
+    <Navbar collapseOnSelect expand="lg" bg="light" variant="light" >
+      <Container fluid className="d-flex justify-content-between align-items-center">
+        <div className="d-flex align-items-center">
+          <Navbar.Brand href="/" className="text-dark">Car List</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto">
+              {Mode()}
+            </Nav>
+          </Navbar.Collapse>
+        </div>
+        <Search />
       </Container>
     </Navbar>
   );

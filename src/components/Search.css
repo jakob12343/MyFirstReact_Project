@@ -1,0 +1,26 @@
+.search-container {
+    display: flex;
+    align-items: center;
+    height: 45px;
+    margin-top: 5px;
+    margin-left: auto;
+  }
+  
+  .search-form {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+  }
+  
+  .search-input {
+    height: 90%;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  
+  .search-button {
+    height: 90%;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  

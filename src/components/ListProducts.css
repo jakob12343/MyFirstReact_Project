@@ -1,9 +1,6 @@
-/* ListProducts.css */
-
 .display-flex {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
     padding: 20px;
-    background-color: #F5F5F5; /* Light grey background */
 }

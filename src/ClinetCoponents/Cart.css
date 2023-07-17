@@ -1,0 +1,82 @@
+/* Cart.css */
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 15px;
+  }
+  
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .card-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .card-text {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .card-text small {
+    font-size: 14px;
+    color: #666;
+    display: block;
+    margin-top: 10px;
+  }
+  
+  .button-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .button-row button {
+    font-size: 14px;
+  }
+  
+  .text-muted {
+    display: flex;
+    align-items: center;
+  }
+  
+  .text-muted button {
+    margin: 0 5px;
+  }
+  
+  .text-muted span {
+    background-color: #6c757d;
+    color: #fff;
+    border-radius: 10px;
+    padding: 2px 10px;
+    font-size: 14px;
+    min-width: 30px;
+    text-align: center;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  

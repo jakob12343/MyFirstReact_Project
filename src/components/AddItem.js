@@ -1,145 +1,150 @@
 import axios from 'axios';
-import React, {  useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
+import Spinner from 'react-bootstrap/Spinner';
+import Toast from 'react-bootstrap/Toast';
 import { Link } from 'react-router-dom';
+import './AddItem.css';
 import ShoppingContext from './Context';
 
 const AddItem = () => {
-    const { fetchProduct } = useContext(ShoppingContext)
-
   const [brand, setBrand] = useState('');
   const [engine, setEngine] = useState('');
   const [category, setCategory] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [kmInScale, setKmInScale] = useState('');
+  const [createStatus, setCreateStatus] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const { fetchImage, carCategories,Addlinkforclinects } = useContext(ShoppingContext);
+  useEffect(() => {
+    Addlinkforclinects('seller')
 
-  const handleBrandChange = (event) => {
-    setBrand(event.target.value);
-    
-  };
-
-  const handleEngineChange = (event) => {
-    setEngine(event.target.value);
-  };
-
-  const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
-  };
-
-  const handleMinPriceChange = (event) => {
-    setMinPrice(event.target.value);
-  };
-
-  const handleMaxPriceChange = (event) => {
-    setMaxPrice(event.target.value);
-  };
-
-  const handleKmInScaleChange = (event) => {
-    setKmInScale(event.target.value);
-  };
-  const handleSubmit = (event) => {
+  }, []);
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-   
+    if (!brand || !engine || !category || !minPrice || !maxPrice || !kmInScale) {
+      setShowToast(true);
+      return;
+    }
+
+    const newItem = [{
+      image: await fetchImage(brand+" "+category),
+      Brand: brand,
+      engine: engine,
+      category: category,
+      min_price: minPrice,
+      max_price: maxPrice,
+      kilometer_scale: kmInScale,
+      isFavorite: false
+    }];
+
+    setLoading(true);
+
+    try {
+      await axios.post('http://localhost:3000/Create', newItem);
+      setCreateStatus('Item created successfully!');
+      setBrand('');
+      setEngine('');
+      setCategory('');
+      setMinPrice('');
+      setMaxPrice('');
+      setKmInScale('');
+    } catch (error) {
+      setCreateStatus('Failed to create item.');
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
-  const Create=async()=>{
-   const Item =[
-    {
-        "Brand": brand,
-        "engine": engine,
-        "category": category,
-        "min_price": minPrice,
-        "max_price": maxPrice,
-        "kilometer_scale": kmInScale
-    
-       }
-   ]
-   
-    await axios.post('http://localhost:3000/Create' , Item)
-    fetchProduct()
-  }
- 
+
   return (
-    <div>
+    <div className="add-item-container">
       <Card style={{ width: '25rem' }}>
         <Card.Body>
           <Form onSubmit={handleSubmit}>
-            <InputGroup className="mb-3">
-              <InputGroup.Text id="inputGroup-sizing-default">
-                Brand
-              </InputGroup.Text>
+            <Form.Group className="mb-3">
+              <Form.Label>Brand</Form.Label>
               <Form.Control
-                aria-label="Default"
-                aria-describedby="inputGroup-sizing-default"
+                type="text"
                 value={brand}
-                onChange={handleBrandChange}
+                onChange={(event) => setBrand(event.target.value)}
               />
-            </InputGroup>
-            <InputGroup className="mb-3">
-              <InputGroup.Text id="inputGroup-sizing-default">
-                Engine
-              </InputGroup.Text>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Engine</Form.Label>
               <Form.Control
-                aria-label="Default"
-                aria-describedby="inputGroup-sizing-default"
+                type="text"
                 value={engine}
-                onChange={handleEngineChange}
+                onChange={(event) => setEngine(event.target.value)}
               />
-            </InputGroup>
-            <InputGroup className="mb-3">
-              <InputGroup.Text id="inputGroup-sizing-default">
-                Category
-              </InputGroup.Text>
-              <Form.Control
-                aria-label="Default"
-                aria-describedby="inputGroup-sizing-default"
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Category</Form.Label>
+              <Form.Select
                 value={category}
-                onChange={handleCategoryChange}
-              />
-            </InputGroup>
-            <InputGroup className="mb-3">
-              <InputGroup.Text id="inputGroup-sizing-default">
-                Min Price
-              </InputGroup.Text>
+                onChange={(event) => setCategory(event.target.value)}
+              >
+                <option value="">Select category</option>
+                {carCategories.map((el) => (
+                  <option key={el} value={el}>
+                    {el}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Min Price</Form.Label>
               <Form.Control
-                aria-label="Default"
-                aria-describedby="inputGroup-sizing-default"
+                type="text"
                 value={minPrice}
-                onChange={handleMinPriceChange}
+                onChange={(event) => setMinPrice(event.target.value)}
               />
-            </InputGroup>
-            <InputGroup className="mb-3">
-              <InputGroup.Text id="inputGroup-sizing-default">
-                Max Price
-              </InputGroup.Text>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Max Price</Form.Label>
               <Form.Control
-                aria-label="Default"
-                aria-describedby="inputGroup-sizing-default"
+                type="text"
                 value={maxPrice}
-                onChange={handleMaxPriceChange}
+                onChange={(event) => setMaxPrice(event.target.value)}
               />
-            </InputGroup>
-            <InputGroup className="mb-3">
-              <InputGroup.Text id="inputGroup-sizing-default">
-                Km In Scale
-              </InputGroup.Text>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Km In Scale</Form.Label>
               <Form.Control
-                aria-label="Default"
-                aria-describedby="inputGroup-sizing-default"
+                type="text"
                 value={kmInScale}
-                onChange={handleKmInScaleChange}
+                onChange={(event) => setKmInScale(event.target.value)}
               />
-            </InputGroup>
-            <Link to={'/'}>
-            <Button type="submit" onClick={Create} variant="primary">
-              Submit
+            </Form.Group>
+            <Button type="submit" variant="primary" disabled={loading}>
+              {loading ? <Spinner animation="border" size="sm" /> : 'Submit'}
             </Button>
-            </Link>
           </Form>
+          {createStatus && (
+            <p className="mt-3">
+              {createStatus}{' '}
+              {createStatus === 'Item created successfully!' && (
+                <Link to="/" className="home-link">Go to Home</Link>
+              )}
+            </p>
+          )}
+          <Toast
+            onClose={() => setShowToast(false)}
+            show={showToast}
+            delay={3000}
+            autohide
+            className="error-toast"
+          >
+            <Toast.Header>
+              <strong className="mr-auto">Error</strong>
+            </Toast.Header>
+            <Toast.Body>Please fill in all fields</Toast.Body>
+          </Toast>
         </Card.Body>
       </Card>
     </div>
